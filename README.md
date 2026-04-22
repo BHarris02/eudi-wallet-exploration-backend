@@ -1,5 +1,11 @@
 # eudi-wallet-exploration-backend
 
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-7F52FF?logo=kotlin&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.5-6DB33F?logo=springboot&logoColor=white)
+![JDK](https://img.shields.io/badge/JDK-21-ED8B00?logo=openjdk&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-8-02303A?logo=gradle&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 ## Overview
 
 This guide walks through building a very minimal but functional digital identity wallet ecosystem from scratch.

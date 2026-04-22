@@ -83,3 +83,23 @@ eudi-wallet-exploration-android     <- Kotlin + Jetpack Compose (Wallet)
 | Credential Format    | SD-JWT (simplified)      | Used in EUDI ARF; mdoc is out if scope for now |
 | Crypto               | Nimbus JOSE + JWT        | Used in official EUDI Kotlin libraries         |
 | Networking (Android) | Ktor Client              | Consistent with EUDI library internals         |
+
+---
+
+## Backend Architecture
+
+The backend hosts both the **Issuer** and **Verifier** in a single Spring Boot application. In a real system these
+would be separate services, but combining them keeps the setup simple for exploration purposes.
+
+The application is structured in three layers:
+
+```text
+config/         <- Spring configuration and bean wiring
+controller/     <- Handles HTTP requests and responses
+crypto/         <- Key management and JWT signing/verification utils
+model/          <- Data classes for requests, responses, and internal state
+service/        <- Business logic; orchestrates flows
+store           <- In-memory state (tokens, nonces, sessions)
+```
+
+---

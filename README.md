@@ -78,16 +78,6 @@ eudi-wallet-exploration-backend     <- Kotlin Spring Boot (Issuer and Verifier)
 eudi-wallet-exploration-android     <- Kotlin + Jetpack Compose (Wallet)
 ```
 
-### Dependency Graph
-
-```mermaid
-graph TD
-    controller --> service
-    service --> crypto
-    service --> store
-    crypto --> config
-```
-
 ---
 
 ## :hammer_and_wrench: Tech Stack
@@ -118,6 +108,16 @@ service/        <- Business logic; orchestrates flows; calls crypto service
 store           <- In-memory state (tokens, nonces, sessions)
 ```
 
+### Dependency Graph
+
+```mermaid
+graph TD
+    controller --> service
+    service --> crypto
+    service --> store
+    crypto --> config
+```
+
 ---
 
 ## :construction: How to Build
@@ -136,7 +136,7 @@ Add to `build.gradle.kts`:
 implementation("com.nimbusds:nimbus-jose-jwt:9.37.3")
 ```
 
-Create the full package structure described in the [Backend Architecture](#backend-architecture) section above.
+Create the full package structure described in the [Backend Architecture](#classical_building-backend-architecture) section above.
 Stub out all classes with empty bodies before implementing anything &mdash; this forces you to think about
 responsibilities before logic.
 

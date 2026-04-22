@@ -159,10 +159,10 @@ data class CredentialSupported(
 )
 
 data class IssuerMetadata(
-    val credentialIssuer: String,
-    val credentialEndpoint: String,
-    val tokenEndpoint: String,
-    val credentialsSupported: List<CredentialSupported>
+    @JsonProperty("credential_issuer") val credentialIssuer: String,
+    @JsonProperty("credential_endpoint") val credentialEndpoint: String,
+    @JsonProperty("token_endpoint") val tokenEndpoint: String,
+    @JsonProperty("credentials_supported") val credentialsSupported: List<CredentialSupported>
 )
 ```
 
@@ -182,7 +182,7 @@ Implement `CredentialOfferController`:
 class CredentialOfferController(private val issuerService: IssuerService) {
     @GetMapping("/credential-offer")
     fun getCredentialOffer(): ResponseEntity<String> {
-        val offerUri = issuerService.getCredentialOffer()
+        val offerUri = issuerService.generateCredentialOffer()
         return ResponseEntity.ok(offerUri)
     }
 }
@@ -196,7 +196,7 @@ In `IssuerService.generateCredentialOffer()`:
 
 ```text
 openid-credential-offer://?
-credential-offer={"credential_issuer":"http://10.0.2.2:8080","credentials":
+credential_offer={"credential_issuer":"http://10.0.2.2:8080","credentials":
 ["ExplorationCredential"],"grants":{"urn:ietf:params:oauth:grant-type:pre-
 authorized_code": {"pre-authorized_code":"<uuid>","user_pin_required":false}}}
 ```
@@ -241,6 +241,8 @@ In `TokenService.exchange()`:
 The `c_nonce` is what the wallet uses as a signed proof JWT when requesting the credential, proving it controls the
 private key it is registering with the issuer.
 
+---
+
 #### Credential Issuance
 
 Implement `CredentialController`:
@@ -273,6 +275,15 @@ data class CredentialRequest(
 )
 ```
 
+`CredentialResponse`:
+
+```Kotlin
+data class CredentialResponse(
+    val credential: String,
+    val format: String = "vc+sd-jwt"
+)
+```
+
 In `CredentialService.issue()`:
 
 1. Call `TokenStore.validateToken(accessToken)` &mdash; throw `401` if not found
@@ -294,3 +305,5 @@ fun sign(claims: JWTClaimsSet): String {
 **Checkpoint:** This is now a minimal, working OID4VCI Issuer. Exercise the full flow using Postman or curl &mdash; fetch metadata, get
 a credential offer, exchange the code for a token, and request a credential. Confirm the returned JWT decodes correctly
 at [jwt.io](https://www.jwt.io/).
+
+---

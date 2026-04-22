@@ -102,7 +102,7 @@ graph TD
 
 ---
 
-## :classical_architecture: Backend Architecture
+## :classical_building: Backend Architecture
 
 The backend hosts both the **Issuer** and **Verifier** in a single Spring Boot application. In a real system these
 would be separate services, but combining them keeps the setup simple for exploration purposes.

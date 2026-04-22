@@ -78,6 +78,16 @@ eudi-wallet-exploration-backend     <- Java Spring Boot (Issuer and Verifier)
 eudi-wallet-exploration-android     <- Kotlin + Jetpack Compose (Wallet)
 ```
 
+### Dependency Graph
+
+```mermaid
+graph TD
+    controller --> service
+    service --> crypto
+    service --> store
+    crypto --> config
+```
+
 ---
 
 ## :hammer_and_wrench: Tech Stack

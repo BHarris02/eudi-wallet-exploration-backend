@@ -14,9 +14,9 @@ issuance and presentation flows.
 
 By the end, you will have built three core concepts:
 
-- **Issuer** &mdash; a Java Spring Boot backend that issues verifiable credentials to a wallet
+- **Issuer** &mdash; a Kotlin Spring Boot backend that issues verifiable credentials to a wallet
 - **Wallet** &mdash; an Android application that receives, stores, and presents credentials
-- **Verifier** &mdash; a Java Spring Boot backend that requests and validates credential presentations
+- **Verifier** &mdash; a Kotlin Spring Boot backend that requests and validates credential presentations
 
 ---
 
@@ -32,7 +32,7 @@ The EUDI Wallet world involves three roles:
 | **Wallet**   | Holds credentials and presents them when requested                                     |
 | **Verifier** | Requests proof of a credential from a wallet (e.g. an age check at a service provider) |
 
-### OIDC4VCI &mdash; OpenID for Verifiable Credential Issuance
+### OID4VCI &mdash; OpenID for Verifiable Credential Issuance
 
 This is the protocol the **Issuer** uses to get a credential into the **Wallet**. The high level flow is:
 
@@ -62,7 +62,7 @@ This is the protocol the **Verifier** uses to request proof from the **Wallet**.
 | VP (Verifiable Presentation) | A VC (or subset of one) wrapped and signed by the Wallet for a specific Verifier                                      |
 | SD-JWT                       | Selective Disclosure JWT &mdash; the credential format used in EUDI; allows the holder to reveal only specific claims |
 | DID                          | Decentralised Identifier &mdash; a way to identify issuers/wallets without a central authority                        |
-| Credential Offer             | A URI the Issuer produces that kicks off the OIDC4VCI flow                                                            |
+| Credential Offer             | A URI the Issuer produces that kicks off the OID4VCI flow                                                             |
 | Presentation Definition      | A JSON structure the Verifier sends describing what credentials and claims it needs                                   |
 | c_nonce                      | A challenge nonce the Issuer sends so the wallet can prove cryptographic key possession                               |
 | Pre-Authorised Code          | A one-time code that allows a wallet to skip the full OAuth login and go straight to token exchange                   |
@@ -84,7 +84,7 @@ eudi-wallet-exploration-android     <- Kotlin + Jetpack Compose (Wallet)
 
 | Component            | Technology               | Reason                                         |
 |----------------------|--------------------------|------------------------------------------------|
-| Backend              | Java + Spring Boot       | &mdash;                                        |
+| Backend              | Kotlin + Spring Boot     | &mdash;                                        |
 | Android              | Kotlin + Jetpack Compose | &mdash;                                        |
 | Credential Format    | SD-JWT (simplified)      | Used in EUDI ARF; mdoc is out if scope for now |
 | Crypto               | Nimbus JOSE + JWT        | Used in official EUDI Kotlin libraries         |
@@ -104,7 +104,7 @@ config/         <- Spring configuration and bean wiring
 controller/     <- Handles HTTP requests and responses
 crypto/         <- Key management and JWT signing/verification utils
 model/          <- Data classes for requests, responses, and internal state
-service/        <- Business logic; orchestrates flows
+service/        <- Business logic; orchestrates flows; calls crypto service
 store           <- In-memory state (tokens, nonces, sessions)
 ```
 

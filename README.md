@@ -74,7 +74,7 @@ This is the protocol the **Verifier** uses to request proof from the **Wallet**.
 Two separate repositories:
 
 ```text
-eudi-wallet-exploration-backend     <- Java Spring Boot (Issuer and Verifier)
+eudi-wallet-exploration-backend     <- Kotlin Spring Boot (Issuer and Verifier)
 eudi-wallet-exploration-android     <- Kotlin + Jetpack Compose (Wallet)
 ```
 
